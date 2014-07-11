@@ -6,14 +6,14 @@
 			"name": "Gabriel Jacinto",
 			"email": "gamjj74@hotmail.com",
 			"homepage": "http://gabrieljmj.github.io"
-    	}
-    ],
-    "license": "MIT",
+		}
+	],
+	"license": "MIT",
 	"require-dev": {
 		"phpunit/phpunit": "3.7.*"
 	},
 	"type": "library",
-    "keywords": ["translator", "library"],
+	"keywords": ["translator", "library"],
 	"autoload": {
 		"psr-4": {
 			"Test\\": "tests/",
