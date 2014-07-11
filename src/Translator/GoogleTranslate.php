@@ -111,6 +111,12 @@
 			return $json->translations->translatedText;
 		}
 
+		/**
+		 * @param integer $originLang
+		 * @param integer $newLang
+		 * @param string  $text
+		 * @return object|array
+		*/
 		private function getJsonFromApi( $originalLang, $newLang, $text ){
 			$originalLang = $this->langs[ $originalLang ];
 			$newLang = $this->langs[ $newLang ];
