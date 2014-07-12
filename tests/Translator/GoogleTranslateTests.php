@@ -17,6 +17,6 @@
 
 			$translator = new GoogleTranslate( $apiKey );
 			$translation = $translator->translate( Languages::PORTUGUESE, Languages::ENGLISH, $originalText );
-			$this->assertEquals( $newText, $translator );
+			$this->assertEquals( $newText, $translation );
 		}
 	}
