@@ -2,7 +2,7 @@ Translator
 ==========
 [![Total Downloads](https://poser.pugx.org/gabrieljmj/translator/downloads.png)](https://packagist.org/packages/gabrieljmj/translator) [![Latest Unstable Version](https://poser.pugx.org/gabrieljmj/translator/v/unstable.png)](https://packagist.org/packages/attwframework/db) [![License](https://poser.pugx.org/gabrieljmj/translator/license.png)](https://packagist.org/packages/gabrieljmj/translator)
 
-Translator to strings using APIs or another things
+Translator to strings using Web Services or another things
 ##Install
 ###Composer
 ```json

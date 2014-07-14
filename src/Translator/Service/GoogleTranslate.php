@@ -4,7 +4,7 @@
 	 * @license MIT License
 	*/
 
-	namespace Translator;
+	namespace Translator\Service;
 
 	use Translator\TranslatorInterface;
 
@@ -108,6 +108,11 @@
 		*/
 		public function translate( $originalLang, $newLang, $text ){
 			$json = $this->getJsonFromApi( $originalLang, $newLang, $text );
+
+			if( isset( $json->error ) ){
+				throw new TranslatorException( 'Google Translate returns: ' . $json->error->message . ' (' . $json->error->code . ')' );
+			}
+
 			return $json->translations->translatedText;
 		}
 
@@ -130,9 +135,19 @@
 
 			$url = str_replace( array_keys( $urlVars ), array_values( $urlVars ), self::API_URL );
 
-			$jsonStr = file_get_contents( $url );
-			$json = json_decode( $jsonStr );
-
-			return $json;
+			$ch = curl_init();
+            
+            curl_setopt( $ch, CURLOPT_URL, $url );
+            curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+            
+            $return = curl_exec( $ch );
+            
+            if( !$return ){
+                throw new RuntimeException( 'An error occurred with the request: ' . curl_error( $ch ) );
+            }
+            
+            curl_close( $ch );
+            
+            return $return;
 		}
 	}
