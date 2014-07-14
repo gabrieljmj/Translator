@@ -14,6 +14,7 @@ Translator to strings using Web Services or another things
 ```
 ##Needs
 * [cURL extension](http://php.net/manual/pt_BR/book.curl.php) to do the web services requests.
+
 ##How to use
 ###Google Translate
 To use the Google Translate, it is necessary an API Key. To create one, follow this steps:
