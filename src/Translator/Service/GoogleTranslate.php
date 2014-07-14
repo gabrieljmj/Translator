@@ -117,7 +117,7 @@
 		}
 
 		/**
-		 * @param integer $originLang
+		 * @param integer $originalLang
 		 * @param integer $newLang
 		 * @param string  $text
 		 * @return object|array
@@ -140,14 +140,14 @@
             curl_setopt( $ch, CURLOPT_URL, $url );
             curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
             
-            $return = curl_exec( $ch );
+			$return = curl_exec( $ch );
             
-            if( !$return ){
-                throw new RuntimeException( 'An error occurred with the request: ' . curl_error( $ch ) );
-            }
+			if( !$return ){
+				throw new RuntimeException( 'An error occurred with the request: ' . curl_error( $ch ) );
+			}
             
-            curl_close( $ch );
+			curl_close( $ch );
             
-            return $return;
+			return $return;
 		}
 	}
