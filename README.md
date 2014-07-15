@@ -43,3 +43,23 @@ $texts = array( 'Hi!', 'How are you?' );
 $translatedText = $translator->translate( Languages::ENGLISH, Languages::PORTUGUESE, $texts );
 //Array( 'Oi!', 'Como vai você?' )
 ```
+###Detecting
+```php
+use Translator\Service\GoogleTranslate;
+use Translator\Http\Request;
+use Translator\Languages;
+
+$text = 'Hi! How are you?';
+$apiKey = 'YOU_API_KEY';
+
+$translator = new GoogleTranslate( new Request(), $apiKey );
+$translatedText = $translator->detect( $text );
+//en
+```
+With an array:
+```php
+$texts = array( 'Hi!', 'Olá!' );
+
+$translatedText = $translator->detect( $texts );
+//Array( 'en', 'pt' )
+```
