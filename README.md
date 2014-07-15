@@ -22,13 +22,27 @@ To use the Google Translate, it is necessary an API Key. To create one, follow t
 * Select a project, or create a new one.
 * In the sidebar on the left, select **APIs & auth**. In the list of APIs, make sure the status is **ON** for the Google Translate API.
 * In the sidebar on the left, select **Credentials**.
+
+###Translating
 ```php
 use Translator\Service\GoogleTranslate;
+use Translator\Http\Request;
 use Translator\Languages;
 
 $text = 'Hi! How are you?';
 $apiKey = 'YOU_API_KEY';
 
-$translator = new GoogleTranslate( $apiKey );
-$translatedText = $translator->translate( Languages::ENGLISH, Languages::PORTUGUESE, $text ); //Oi! Como vai você?
+$translator = new GoogleTranslate( new Request(), $apiKey );
+$translatedText = $translator->translate( Languages::ENGLISH, Languages::PORTUGUESE, $text );
+//Oi! Como vai você?
+```
+With array:
+```php
+$texts = array( 'Hi!', 'How are you?' );
+
+$translatedText = $translator->translate( Languages::ENGLISH, Languages::PORTUGUESE, $texts );
+//Array(
+//  'Oi!',
+//  'Como vai você?'
+//)
 ```
