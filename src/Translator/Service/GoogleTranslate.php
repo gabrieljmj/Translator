@@ -76,7 +76,7 @@
 			if( count( $json->translations ) > 1 ){
 				$return = array();
 
-				foreach( $this->translations as $translation ){
+				foreach( $json->translations as $translation ){
 					$return[] = $translation->translatedText;
 				}
 
