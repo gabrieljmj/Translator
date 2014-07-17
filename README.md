@@ -36,14 +36,20 @@ $apiKey = 'YOU_API_KEY';
 
 $translator = new GoogleTranslate( new Request(), $apiKey );
 $translatedText = $translator->translate( 'en', 'pt', $text );
-//Oi! Como vai você?
+$translatedText->getNewText();//'Oi! Como vai você?'
+$translatedText->getOriginalText();//'Hi! How are you?'
+$translatedText->getOriginalLang();//en
+$translatedText->getNewLang();//pt
 ```
 With an array:
 ```php
 $texts = array( 'Hi!', 'How are you?' );
 
 $translatedText = $translator->translate( 'en', 'pt', $texts );
-//Array( 'Oi!', 'Como vai você?' )
+$translatedText->getNewText();//Array( 'Oi!', 'Como vai você?' )
+$translatedText->getOriginalText();//Array( 'Hi!', 'How are you?' )
+$translatedText->getOriginalLang();//en
+$translatedText->getNewLang();//pt
 ```
 ####Detecting
 ```php
@@ -54,13 +60,15 @@ $text = 'Hi! How are you?';
 $apiKey = 'YOU_API_KEY';
 
 $translator = new GoogleTranslate( new Request(), $apiKey );
-$translatedText = $translator->detect( $text );
-//en
+$detectedText = $translator->detect( $text );
+$detectedText->getLang(); //en
+$detectedText->getText()//Hi! How are you?
 ```
 With an array:
 ```php
 $texts = array( 'Hi!', 'Olá!' );
 
-$translatedText = $translator->detect( $texts );
-//Array( 'en', 'pt' )
+$detectedText = $translator->detect( $texts );
+$detectedText->getLang();//Array( 'en', 'pt' )
+$detectedText->getText();//array( 'Hi!', 'Olá!' )
 ```
