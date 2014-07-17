@@ -23,31 +23,32 @@ To use the Google Translate, it is necessary an API Key. To create one, follow t
 * In the sidebar on the left, select **APIs & auth**. In the list of APIs, make sure the status is **ON** for the Google Translate API.
 * In the sidebar on the left, select **Credentials**.
 
+####Getting accepted languages of a web service
+Use the method ```getAcceptedLangs()```. It will return an array with all languages accepted by web service that you are using.
+
 ####Translating
 ```php
 use Translator\Service\GoogleTranslate;
 use Translator\Http\Request;
-use Translator\Languages;
 
 $text = 'Hi! How are you?';
 $apiKey = 'YOU_API_KEY';
 
 $translator = new GoogleTranslate( new Request(), $apiKey );
-$translatedText = $translator->translate( Languages::ENGLISH, Languages::PORTUGUESE, $text );
+$translatedText = $translator->translate( 'en', 'pt', $text );
 //Oi! Como vai você?
 ```
 With an array:
 ```php
 $texts = array( 'Hi!', 'How are you?' );
 
-$translatedText = $translator->translate( Languages::ENGLISH, Languages::PORTUGUESE, $texts );
+$translatedText = $translator->translate( 'en', 'pt', $texts );
 //Array( 'Oi!', 'Como vai você?' )
 ```
 ####Detecting
 ```php
 use Translator\Service\GoogleTranslate;
 use Translator\Http\Request;
-use Translator\Languages;
 
 $text = 'Hi! How are you?';
 $apiKey = 'YOU_API_KEY';
