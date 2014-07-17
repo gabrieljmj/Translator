@@ -1,6 +1,6 @@
 Translator
 ==========
-[![Total Downloads](https://poser.pugx.org/gabrieljmj/translator/downloads.png)](https://packagist.org/packages/gabrieljmj/translator) [![Latest Unstable Version](https://poser.pugx.org/gabrieljmj/translator/v/unstable.png)](https://packagist.org/packages/gabrieljmj/translator) [![License](https://poser.pugx.org/gabrieljmj/translator/license.png)](https://packagist.org/packages/gabrieljmj/translator)
+[![Total Downloads](https://poser.pugx.org/gabrieljmj/translator/downloads.png)](https://packagist.org/packages/gabrieljmj/translator) [![Latest Unstable Version](https://poser.pugx.org/gabrieljmj/translator/v/unstable.png)](https://packagist.org/packages/gabrieljmj/translator) [![License](https://poser.pugx.org/gabrieljmj/translator/license.png)](https://packagist.org/packages/gabrieljmj/translator) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GabrielJMJ/Translator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GabrielJMJ/Translator/?branch=master)
 
 Translator to texts using Web Services or another things that can do this action.
 ##Install
