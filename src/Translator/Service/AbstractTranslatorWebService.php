@@ -9,7 +9,7 @@
 	use Translator\TranslatorInterface;
 	use Translator\Http\Request;
 
-	abstract AbstractTranslatorWebService implements TranslatorInterface{
+	abstract class AbstractTranslatorWebService implements TranslatorInterface{
 		/**
 		 * Object for HTTP requests
 		 *
