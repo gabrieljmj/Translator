@@ -3,6 +3,8 @@
 
 	use \PHPUnit_Framework_TestCase;
 	use Translator\Http\Request;
+	use Translator\TranslatedTextInfoInterface;
+	use Translator\DetectedLanguageInfoInterface;
 
 	abstract class AbstractTranslatorTests extends PHPUnit_Framework_TestCase{
 		private $request;
@@ -20,7 +22,10 @@
 			$newText = 'Hi';
 
 			$translation = $this->getTranslator()->translate( 'pt', 'en', $originalText );
-			$this->assertEquals( $newText, $translation );
+			$this->assertEquals( 'pt', $translation->getOriginalLang() );
+			$this->assertEquals( 'en', $translation->getNewLang() );
+			$this->assertEquals( $originalText, $translation->getOriginalText() );
+			$this->assertEquals( $newText, $translation->getNewText() );
 		}
 
 		public function testTranslationWithArray(){
@@ -28,7 +33,10 @@
 			$newText = array( 'Hi', 'Bye' );
 
 			$translation = $this->getTranslator()->translate( 'pt', 'en', $originalText );
-			$this->assertEquals( $newText, $translation );
+			$this->assertEquals( 'pt', $translation->getOriginalLang() );
+			$this->assertEquals( 'en', $translation->getNewLang() );
+			$this->assertEquals( $originalText, $translation->getOriginalText() );
+			$this->assertEquals( $newText, $translation->getNewText() );
 		}
 
 		/**
@@ -41,7 +49,16 @@
 
 		public function testLanguageDetection(){
 			$detection = $this->getTranslator()->detect( 'Olá' );
-			$this->assertEquals( 'pt', $detection );
+			$this->assertEquals( 'Olá!', $detection->getText() );
+			$this->assertEquals( 'pt', $detection->getLang() );
+		}
+
+		public function testLanguageDetectionWithArray(){
+			$texts = array( 'hi', 'olá' );
+
+			$detection = $this->getTranslator()->detect( $texts );
+			$this->assertEquals( $texts, $detection->getText() );
+			$this->assertEquals( array( 'en', 'pt' ), $detection->getLang() );
 		}
 
 		abstract protected function getTranslator();

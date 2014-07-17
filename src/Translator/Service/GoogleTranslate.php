@@ -9,6 +9,8 @@
 	use Translator\Service\AbstractTranslatorWebService;
 	use Translator\Exception\TranslatorException;
 	use Translator\Http\Request;
+	use Translator\Translated;
+	use Translator\Detected;
 
 	class GoogleTranslate extends AbstractTranslatorWebService{
 		const API_URL = 'https://www.googleapis.com/language/translate/v2';
@@ -80,10 +82,10 @@
 					$return[] = $translation->translatedText;
 				}
 
-				return $return;
+				return new Translated( $text, $return, $originalLang, $newLang );
 			}
 
-			return $json->translations[0]->translatedText;
+			return new Translated( $text, $json->translations[0]->translatedText, $originalLang, $newLang );
 		}
 
 		/**
@@ -97,16 +99,17 @@
 
 			if( is_array( $detection->data->detections ) ){
 				$return = array();
+
 				foreach( $detection->data->detections as $d ){
 					foreach( $d as $d2 ){
 						$return[] = $d2->language;
 					}
 				}
 
-				return $return;
+				return new Detected( $text, $return );
 			}
 
-			return $detection->data->detections[0][0]->language;
+			return new Detected( $text, $detection->data->detections[0][0]->language );
 		}
 
 		/**
