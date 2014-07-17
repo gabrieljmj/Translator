@@ -8,6 +8,13 @@
 
 	interface TranslatorInterface{
 		/**
+		 * Returns all accepted languages by service
+		 *
+		 * @return array
+		*/
+		public function getAcceptedLangs();
+
+		/**
 		 * Translate a string from a language to another language
 		 * Use the constants of \Translator\Languages to param $originalLang and $newLang
 		 *

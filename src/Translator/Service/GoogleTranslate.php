@@ -18,72 +18,7 @@
 		 *
 		 * @var array
 		*/
-		private $langs = array(
-			1 => 'af',
-				 'sq',
-				 'ar',
-				 'az',
-				 'eu',
-				 'Bbn',
-				 'be',
-				 'bg',
-				 'ca',
-				 'zh-CN',
-				 'zh-TW',
-				 'hr',
-				 'cs',
-				 'da',
-				 'nl',
-				 'en',
-				 'eo',
-				 'et',
-				 'tl',
-				 'fi',
-				 'fr',
-				 'gl',
-				 'ka',
-				 'de',
-				 'el',
-				 'gu',
-				 'ht',
-				 'iw',
-				 'hi',
-				 'hu',
-				 'is',
-				 'id',
-				 'ga',
-				 'it',
-				 'ja',
-				 'kn',
-				 'ko',
-				 'la',
-				 'lv',
-				 'lt',
-				 'mk',
-				 'ms',
-				 'mt',
-				 'no',
-				 'fa',
-				 'pl',
-				 'pt',
-				 'ro',
-				 'ru',
-				 'sr',
-				 'sk',
-				 'sl',
-				 'es',
-				 'sw',
-				 'sv',
-				 'ta',
-				 'te',
-				 'th',
-				 'tr',
-				 'uk',
-				 'ur',
-				 'vi',
-				 'cy',
-				 'yi'
-		);
+		private $langs;
 
 		/**
 		 * A key used to Google APIs
@@ -98,6 +33,31 @@
 		public function __construct( Request $request, $apiKey ){
 			parent::__construct( $request );
 			$this->apiKey = $apiKey;
+			$this->setLangs();
+		}
+
+		/**
+		 * Returns all accepted languages by service
+		 *
+		 * @return array
+		*/
+		public function getAcceptedLangs(){
+			return $this->langs;
+		}
+
+		/**
+		 * Updates with all accepted languages
+		*/
+		private function setLangs(){
+			$url = self::API_URL . '/languages';
+
+			$return = $this->request->send( $url, array( 'key' => $this->apiKey ) );
+			$json = json_decode( $return );
+			$this->verifyErrorAndThrowAnException( $json );
+
+			foreach( $json->data->languages as $lang ){
+				$this->langs[] = $lang->language;
+			}
 		}
 
 		/**
@@ -111,10 +71,7 @@
 		*/
 		public function translate( $originalLang, $newLang, $text ){
 			$json = $this->getJsonFromApi( $originalLang, $newLang, $text );
-
-			if( isset( $json->error ) ){
-				throw new TranslatorException( 'Google Translate returns: ' . $json->error->message . ' (' . $json->error->code . ')' );
-			}
+			$this->verifyErrorAndThrowAnException( $json );
 
 			if( count( $json->translations ) > 1 ){
 				$return = array();
@@ -163,17 +120,15 @@
 
 			$getParams = array(
 				'key' => $this->apiKey,
-				'from' => $originalLang,
-				'to' => $newLang
+				'source' => $originalLang,
+				'target' => $newLang
 			);
 
 			$qParam = $this->constructQParam( $text );
 
 			$url = self::API_URL . '?' . http_build_query( $getParams ) . $qParam;
 
-			$return = $this->request->send( $url );
-            
-			return $return;
+			return $this->request->send( $url );
 		}
 
 		/**
@@ -185,11 +140,12 @@
 
 			$url = self::API_URL . '/detect?key=' . $this->apiKey . $qParam;
 
-			$return = $this->request->send( $url );
-
-			return $return;
+			return $this->request->send( $url );
 		}
 
+		/**
+		 * @param string|array
+		*/
 		private function constructQParam( $text ){
 			$qParam = null;
 
@@ -210,5 +166,11 @@
 			}
 
 			return $qParam;
+		}
+
+		private function verifyErrorAndThrowAnException( $json ){
+			if( isset( $json->error ) ){
+				throw new TranslatorException( 'Google Translate returns: ' . $json->error->message . ' (' . $json->error->code . ')' );
+			}
 		}
 	}

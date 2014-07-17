@@ -1,4 +1,9 @@
 <?php
+	/**
+	 * @author Gabriel Jacinto <gamjj74@hotmail.com>
+	 * @license MIT License
+	*/
+	
 	namespace Translator\Http;
 
 	use \RuntimeException;
@@ -16,7 +21,7 @@
 		*/
 		public function send( $url, $params = null, $header = null, $ssl = false, $post = false ){
 			if( !$post ){
-				$url = ( is_array( $params ) && count( $params ) > 0 ) ? $url . '?' . http_build_query( $params ) : $url . $params;
+				$url .= ( is_array( $params ) && count( $params ) > 0 ) ? '?' . http_build_query( $params ) : $params;
 			}
 
 			$ch = curl_init();

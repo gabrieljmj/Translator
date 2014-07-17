@@ -3,3 +3,5 @@ composer.lock
 vendor
 phpunit
 test.php
+src/Translator/Service/MicrosftTranslator.php
+src/Translator/Service/YandexTranslate.php
