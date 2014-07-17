@@ -44,7 +44,7 @@
 		*/
 		public function __construct( $originalText, $newText, $originalLang, $newLang ){
 			$this->originalText = $originalText;
-			$this->newText = $newText
+			$this->newText = $newText;
 			$this->originalLang = $originalLang;
 			$this->newLang = $newLang;
 		}
