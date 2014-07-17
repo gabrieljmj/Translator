@@ -2,7 +2,7 @@ Translator
 ==========
 [![Total Downloads](https://poser.pugx.org/gabrieljmj/translator/downloads.png)](https://packagist.org/packages/gabrieljmj/translator) [![Latest Unstable Version](https://poser.pugx.org/gabrieljmj/translator/v/unstable.png)](https://packagist.org/packages/gabrieljmj/translator) [![License](https://poser.pugx.org/gabrieljmj/translator/license.png)](https://packagist.org/packages/gabrieljmj/translator)
 
-Translator to strings using Web Services or another things
+Translator to texts using Web Services or another things that can do this action.
 ##Install
 ###Composer
 ```json
@@ -22,13 +22,44 @@ To use the Google Translate, it is necessary an API Key. To create one, follow t
 * Select a project, or create a new one.
 * In the sidebar on the left, select **APIs & auth**. In the list of APIs, make sure the status is **ON** for the Google Translate API.
 * In the sidebar on the left, select **Credentials**.
+
+####Translating
 ```php
 use Translator\Service\GoogleTranslate;
+use Translator\Http\Request;
 use Translator\Languages;
 
 $text = 'Hi! How are you?';
 $apiKey = 'YOU_API_KEY';
 
-$translator = new GoogleTranslate( $apiKey );
-$translatedText = $translator->translate( Languages::ENGLISH, Languages::PORTUGUESE, $text ); //Oi! Como vai você?
+$translator = new GoogleTranslate( new Request(), $apiKey );
+$translatedText = $translator->translate( Languages::ENGLISH, Languages::PORTUGUESE, $text );
+//Oi! Como vai você?
+```
+With an array:
+```php
+$texts = array( 'Hi!', 'How are you?' );
+
+$translatedText = $translator->translate( Languages::ENGLISH, Languages::PORTUGUESE, $texts );
+//Array( 'Oi!', 'Como vai você?' )
+```
+####Detecting
+```php
+use Translator\Service\GoogleTranslate;
+use Translator\Http\Request;
+use Translator\Languages;
+
+$text = 'Hi! How are you?';
+$apiKey = 'YOU_API_KEY';
+
+$translator = new GoogleTranslate( new Request(), $apiKey );
+$translatedText = $translator->detect( $text );
+//en
+```
+With an array:
+```php
+$texts = array( 'Hi!', 'Olá!' );
+
+$translatedText = $translator->detect( $texts );
+//Array( 'en', 'pt' )
 ```
