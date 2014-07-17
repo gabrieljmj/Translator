@@ -70,7 +70,7 @@
 		 * @return string
 		*/
 		public function translate( $originalLang, $newLang, $text ){
-			$json = $this->getJsonFromApi( $originalLang, $newLang, $text );
+			$json = $this->getTranslationFromApi( $originalLang, $newLang, $text );
 			$this->verifyErrorAndThrowAnException( $json );
 
 			if( count( $json->translations ) > 1 ){
