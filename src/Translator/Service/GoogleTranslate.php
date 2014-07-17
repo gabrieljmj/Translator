@@ -96,6 +96,7 @@
 			$detection = $this->getDetectionFromApi( $text );
 
 			if( is_array( $detection->data->detections ) ){
+				$return = array();
 				foreach( $detection->data->detections as $d ){
 					foreach( $d as $d2 ){
 						$return[] = $d2->language;

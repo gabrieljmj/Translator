@@ -18,7 +18,7 @@
 		protected $request;
 
 		/**
-		 * @param \Translator\Http\Request
+		 * @param \Translator\Http\Request $request
 		*/
 		public function __construct( Request $request ){
 			$this->request = $request;
