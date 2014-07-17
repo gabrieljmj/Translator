@@ -6,7 +6,7 @@
 
 	namespace Translator\Service;
 
-	use Translator\TranslatorInterface;
+	use Translator\Service\AbstractTranslatorWebService;
 	use Translator\Exception\TranslatorException;
 	use Translator\Http\Request;
 
