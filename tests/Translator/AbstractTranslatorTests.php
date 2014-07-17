@@ -2,7 +2,6 @@
 	namespace Test\Translator;
 
 	use \PHPUnit_Framework_TestCase;
-	use Translator\Languages;
 	use Translator\Http\Request;
 
 	abstract class AbstractTranslatorTests extends PHPUnit_Framework_TestCase{
@@ -20,7 +19,7 @@
 			$originalText = 'Oi';
 			$newText = 'Hi';
 
-			$translation = $this->getTranslator()->translate( Languages::PORTUGUESE, Languages::ENGLISH, $originalText );
+			$translation = $this->getTranslator()->translate( 'pt', 'en', $originalText );
 			$this->assertEquals( $newText, $translation );
 		}
 
@@ -28,7 +27,7 @@
 			$originalText = array( 'Oi', 'Tchau' );
 			$newText = array( 'Hi', 'Bye' );
 
-			$translation = $this->getTranslator()->translate( Languages::PORTUGUESE, Languages::ENGLISH, $originalText );
+			$translation = $this->getTranslator()->translate( 'pt', 'en', $originalText );
 			$this->assertEquals( $newText, $translation );
 		}
 
@@ -37,7 +36,7 @@
 		*/
 		public function testExceptionWithInvalidApiKey(){
 			$translator = new GoogleTranslate( $this->request, '[INVALID API KEY]' );
-			$translation = $translator->translate( Languages::PORTUGUESE, Languages::ENGLISH, 'Oi' );
+			$translation = $translator->translate( 'pt', 'en', 'Oi' );
 		}
 
 		public function testLanguageDetection(){
