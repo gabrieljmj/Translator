@@ -6,6 +6,6 @@
 
 	class GoogleTranslateTests extends AbstractTranslatorTests{
 		protected function getTranslator(){
-			return new GoogleTranslate( $this->request, 'YOU_API_KEY' );
+			return new GoogleTranslate( $this->request, 'YOUR_API_KEY' );
 		}
 	}
