@@ -132,7 +132,7 @@
 
 			$url = self::API_URL . '?' . http_build_query( $getParams ) . $qParam;
 
-			return $this->request->send( $url );
+			return json_decode( $this->request->send( $url ) );
 		}
 
 		/**
@@ -144,7 +144,7 @@
 
 			$url = self::API_URL . '/detect?key=' . $this->apiKey . $qParam;
 
-			return $this->request->send( $url );
+			return json_decode( $this->request->send( $url ) );
 		}
 
 		/**
