@@ -16,7 +16,7 @@ Translator to texts using Web Services or other things that can do this action.
 * [cURL extension](http://php.net/manual/pt_BR/book.curl.php) to do the web services requests.
 
 ##Support
-###Google Translate
+###Google Translate - Not tested
   To use the Google Translate, it is necessary an API Key. To create one, follow this steps:
   * Go to the [Google Developers Console](https://console.developers.google.com/).
   * Select a project, or create a new one.
@@ -26,6 +26,7 @@ Translator to texts using Web Services or other things that can do this action.
   **How to instance:** ```new GoogleTranslate( Request $request, string $apiKey )```
 
 ##How to use
+Examples with Google Translate
 ###Getting accepted languages of a web service
 Use the method ```getAcceptedLangs()```. It will return an array with all languages accepted by web service that you are using.
 
