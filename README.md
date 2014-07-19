@@ -15,18 +15,21 @@ Translator to texts using Web Services or other things that can do this action.
 ##Needs
 * [cURL extension](http://php.net/manual/pt_BR/book.curl.php) to do the web services requests.
 
-##How to use
+##Support
 ###Google Translate
-To use the Google Translate, it is necessary an API Key. To create one, follow this steps:
-* Go to the [Google Developers Console](https://console.developers.google.com/).
-* Select a project, or create a new one.
-* In the sidebar on the left, select **APIs & auth**. In the list of APIs, make sure the status is **ON** for the Google Translate API.
-* In the sidebar on the left, select **Credentials**.
+  To use the Google Translate, it is necessary an API Key. To create one, follow this steps:
+  * Go to the [Google Developers Console](https://console.developers.google.com/).
+  * Select a project, or create a new one.
+  * In the sidebar on the left, select **APIs & auth**. In the list of APIs, make sure the status is **ON** for the Google Translate API.
+  * In the sidebar on the left, select **Credentials**.
 
-####Getting accepted languages of a web service
+  **How to instance:** ```new GoogleTranslate( Request $request, string $apiKey )```
+
+##How to use
+###Getting accepted languages of a web service
 Use the method ```getAcceptedLangs()```. It will return an array with all languages accepted by web service that you are using.
 
-####Translating
+###Translating
 ```php
 use Translator\Service\GoogleTranslate;
 use Translator\Http\Request;
@@ -51,7 +54,7 @@ $translatedText->getOriginalText();//Array( 'Hi!', 'How are you?' )
 $translatedText->getOriginalLang();//en
 $translatedText->getNewLang();//pt
 ```
-####Detecting
+###Detecting
 ```php
 use Translator\Service\GoogleTranslate;
 use Translator\Http\Request;
