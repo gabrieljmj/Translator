@@ -45,4 +45,21 @@
 		public function getLang(){
 			return $this->lang;
 		}
+
+		/**
+		 * @return array
+		*/
+		public function getDetectedTextWithLang(){
+			$arr = array();
+
+			if( is_array( $this->text ) ){
+				foreach( $this->text as $key => $text ){
+					$arr[ $text ] = $this->lang[ $key ]; 
+				}
+			}else{
+				$arr[ $this->text ] = $this->lang;
+			}
+
+			return $arr;
+		}
 	}

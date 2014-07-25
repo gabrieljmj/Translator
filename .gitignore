@@ -4,4 +4,3 @@ vendor
 phpunit
 test.php
 src/Translator/Service/MicrosoftTranslator.php
-src/Translator/Service/YandexTranslate.php

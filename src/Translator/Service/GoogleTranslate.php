@@ -119,18 +119,15 @@
 		 * @return object|array
 		*/
 		private function getTranslationFromApi( $originalLang, $newLang, $text ){
-			$originalLang = $this->langs[ $originalLang ];
-			$newLang = $this->langs[ $newLang ];
-
 			$getParams = array(
 				'key' => $this->apiKey,
 				'source' => $originalLang,
 				'target' => $newLang
 			);
 
-			$qParam = $this->constructQParam( $text );
+			$qParam = $this->constructTextParam( 'q', $text );
 
-			$url = self::API_URL . '?' . http_build_query( $getParams ) . $qParam;
+			$url = self::API_URL . '?' . http_build_query( $getParams ) . '&' . $qParam;
 
 			return json_decode( $this->request->send( $url ) );
 		}
@@ -140,36 +137,11 @@
 		 * @return object|array
 		*/
 		private function getDetectionFromApi( $text ){
-			$qParam = $this->constructQParam( $text );
+			$qParam = $this->constructTextParam( 'q', $text );
 
-			$url = self::API_URL . '/detect?key=' . $this->apiKey . $qParam;
+			$url = self::API_URL . '/detect?key=' . $this->apiKey . '&' . $qParam;
 
 			return json_decode( $this->request->send( $url ) );
-		}
-
-		/**
-		 * @param string|array
-		*/
-		private function constructQParam( $text ){
-			$qParam = null;
-
-			if( is_array( $text ) ){
-				foreach( $text as $str ){
-					if( !is_string( $str ) ){
-						throw new TranslatorException( 'All parameters must be string' );
-					}
-
-					$qParam .= '&q=' . $str;
-				}
-			}else{
-				if( !is_string( $text ) ){
-					throw new TranslatorException( 'The text must be string' );
-				}
-
-				$qParam = '&' . $text;
-			}
-
-			return $qParam;
 		}
 
 		private function verifyErrorAndThrowAnException( $json ){

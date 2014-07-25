@@ -16,4 +16,9 @@
 		 * @return string|array
 		*/
 		public function getLang();
+
+		/**
+		 * @return array
+		*/
+		public function getDetectedTextWithLang();
 	}
