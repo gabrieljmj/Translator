@@ -43,7 +43,7 @@ use Translator\Service\GoogleTranslate;
 use Translator\Http\Request;
 
 $text = 'Hi! How are you?';
-$apiKey = 'YOU_API_KEY';
+$apiKey = 'YOUR_API_KEY';
 
 $translator = new GoogleTranslate( new Request(), $apiKey );
 $translatedText = $translator->translate( 'en', 'pt', $text );
@@ -64,16 +64,10 @@ $translatedText->getNewLang();//pt
 ```
 ###Detecting
 ```php
-use Translator\Service\GoogleTranslate;
-use Translator\Http\Request;
-
-$text = 'Hi! How are you?';
-$apiKey = 'YOU_API_KEY';
-
-$translator = new GoogleTranslate( new Request(), $apiKey );
 $detectedText = $translator->detect( $text );
-$detectedText->getLang(); //en
+$detectedText->getLang();//en
 $detectedText->getText()//Hi! How are you?
+$detectedText->getDetectedTextWithLang();//Array( 'Hi! How are you?' => 'en' )
 ```
 With an array:
 ```php
@@ -81,5 +75,6 @@ $texts = array( 'Hi!', 'Olá!' );
 
 $detectedText = $translator->detect( $texts );
 $detectedText->getLang();//Array( 'en', 'pt' )
-$detectedText->getText();//array( 'Hi!', 'Olá!' )
+$detectedText->getText();//Array( 'Hi!', 'Olá!' )
+$detectedText->getDetectedTextWithLang();//Array( 'Hi!' => 'en', 'Olá!' => 'pt' )
 ```
