@@ -21,7 +21,7 @@
 		 * @param integer       $originLang
 		 * @param integer       $newLang
 		 * @param string|array  $text
-		 * @return string
+		 * @return \Translator\TranslatedTextInfoInterface
 		*/
 		public function translate( $originalLang, $newLang, $text );
 
@@ -29,7 +29,7 @@
 		 * Detect the language of one or more texts
 		 *
 		 * @param string|array $text
-		 * @return string
+		 * @return \Translator\DetectedLanguageInfoInterface
 		*/
 		public function detect( $text );
 	}
