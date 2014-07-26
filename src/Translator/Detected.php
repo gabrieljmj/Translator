@@ -53,9 +53,7 @@
 			$arr = array();
 
 			if( is_array( $this->text ) ){
-				foreach( $this->text as $key => $text ){
-					$arr[ $text ] = $this->lang[ $key ]; 
-				}
+				$arr = array_combine( $this->text, $this->lang );
 			}else{
 				$arr[ $this->text ] = $this->lang;
 			}
