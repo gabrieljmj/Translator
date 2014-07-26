@@ -23,7 +23,14 @@ Translator to texts using Web Services or other things that can do this action.
   * In the sidebar on the left, select **APIs & auth**. In the list of APIs, make sure the status is **ON** for the Google Translate API.
   * In the sidebar on the left, select **Credentials**.
 
-  **How to instance:** ```new GoogleTranslate( Request $request, string $apiKey )```
+  **How to instance:** ```new \Translator\Service\GoogleTranslate( Request $request, string $apiKey )```
+
+###Yandex Translate - Tested
+  To use, also is necessary an API Key.
+  * Go to [API key request form](http://api.yandex.com/key/form.xml?service=trnsl).
+  * After create, go to [My keys](http://api.yandex.com/key/keyslist.xml).
+  
+  **How to instance:** ```new \Translator\Service\YandexTranslate( Request $request, string $apiKey )```
 
 ##How to use
 Examples with Google Translate
