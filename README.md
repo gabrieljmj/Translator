@@ -23,7 +23,14 @@ Translator to texts using Web Services or other things that can do this action.
   * In the sidebar on the left, select **APIs & auth**. In the list of APIs, make sure the status is **ON** for the Google Translate API.
   * In the sidebar on the left, select **Credentials**.
 
-  **How to instance:** ```new GoogleTranslate( Request $request, string $apiKey )```
+  **How to instance:** ```new \Translator\Service\GoogleTranslate( Request $request, string $apiKey )```
+
+###Yandex Translate - Tested
+  To use, also is necessary an API Key.
+  * Go to [API key request form](http://api.yandex.com/key/form.xml?service=trnsl).
+  * After create, go to [My keys](http://api.yandex.com/key/keyslist.xml).
+  
+  **How to instance:** ```new \Translator\Service\YandexTranslate( Request $request, string $apiKey )```
 
 ##How to use
 Examples with Google Translate
@@ -36,7 +43,7 @@ use Translator\Service\GoogleTranslate;
 use Translator\Http\Request;
 
 $text = 'Hi! How are you?';
-$apiKey = 'YOU_API_KEY';
+$apiKey = 'YOUR_API_KEY';
 
 $translator = new GoogleTranslate( new Request(), $apiKey );
 $translatedText = $translator->translate( 'en', 'pt', $text );
@@ -57,16 +64,10 @@ $translatedText->getNewLang();//pt
 ```
 ###Detecting
 ```php
-use Translator\Service\GoogleTranslate;
-use Translator\Http\Request;
-
-$text = 'Hi! How are you?';
-$apiKey = 'YOU_API_KEY';
-
-$translator = new GoogleTranslate( new Request(), $apiKey );
 $detectedText = $translator->detect( $text );
-$detectedText->getLang(); //en
+$detectedText->getLang();//en
 $detectedText->getText()//Hi! How are you?
+$detectedText->getDetectedTextWithLang();//Array( 'Hi! How are you?' => 'en' )
 ```
 With an array:
 ```php
@@ -74,5 +75,6 @@ $texts = array( 'Hi!', 'Olá!' );
 
 $detectedText = $translator->detect( $texts );
 $detectedText->getLang();//Array( 'en', 'pt' )
-$detectedText->getText();//array( 'Hi!', 'Olá!' )
+$detectedText->getText();//Array( 'Hi!', 'Olá!' )
+$detectedText->getDetectedTextWithLang();//Array( 'Hi!' => 'en', 'Olá!' => 'pt' )
 ```
