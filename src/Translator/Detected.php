@@ -24,8 +24,8 @@
 		private $lang;
 
 		/**
-		 * @param string|array
-		 * @param string|array
+		 * @param string|array $text
+		 * @param string|array $lang
 		*/
 		public function __construct( $text, $lang ){
 			$this->text = $text;
@@ -52,7 +52,7 @@
 		public function getDetectedTextWithLang(){
 			$arr = array();
 
-			if( is_array( $this->text ) ){
+			if( is_array( $this->text ) && is_array( $this->lang ) ){
 				$arr = array_combine( $this->text, $this->lang );
 			}else{
 				$arr[ $this->text ] = $this->lang;
