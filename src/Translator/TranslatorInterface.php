@@ -6,6 +6,9 @@
 	
 	namespace Translator;
 
+	/**
+	 * Interface to translators
+	*/
 	interface TranslatorInterface{
 		/**
 		 * Returns all accepted languages by service
