@@ -39,18 +39,11 @@
 			$this->assertEquals( $newText, $translation->getNewText() );
 		}
 
-		/**
-		 * @exceptedException Translator\Exception\TranslatorException
-		*/
-		public function testExceptionWithInvalidApiKey(){
-			$translator = new GoogleTranslate( $this->request, '[INVALID API KEY]' );
-			$translation = $translator->translate( 'pt', 'en', 'Oi' );
-		}
-
 		public function testLanguageDetection(){
 			$detection = $this->getTranslator()->detect( 'Olá' );
 			$this->assertEquals( 'Olá!', $detection->getText() );
 			$this->assertEquals( 'pt', $detection->getLang() );
+			$this->assertEquals( array( 'Olá!' => 'pt' ), $detection->getDetectedTextWithLang() );
 		}
 
 		public function testLanguageDetectionWithArray(){
@@ -59,6 +52,7 @@
 			$detection = $this->getTranslator()->detect( $texts );
 			$this->assertEquals( $texts, $detection->getText() );
 			$this->assertEquals( array( 'en', 'pt' ), $detection->getLang() );
+			$this->assertEquals( array( 'hi' => 'en', 'Olá!' => 'pt' ), $detection->getDetectedTextWithLang() );
 		}
 
 		abstract protected function getTranslator();
