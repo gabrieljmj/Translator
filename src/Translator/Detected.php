@@ -10,7 +10,7 @@
 
 	class Detected implements DetectedLanguageInfoInterface{
 		/**
-		 * Text(s) to detected that language
+		 * Text(s) to detected the language
 		 *
 		 * @var string|array
 		*/
