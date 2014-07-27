@@ -50,14 +50,10 @@
 		 * @return array
 		*/
 		public function getDetectedTextWithLang(){
-			$arr = array();
-
 			if( is_array( $this->text ) && is_array( $this->lang ) ){
-				$arr = array_combine( $this->text, $this->lang );
-			}else{
-				$arr[ $this->text ] = $this->lang;
+				return array_combine( $this->text, $this->lang );
 			}
 
-			return $arr;
+			return array( $this->text => $this->lang );
 		}
 	}
