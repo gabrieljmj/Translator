@@ -8,7 +8,7 @@
 
 	use Translator\Service\AbstractTranslatorWebService;
 	use Translator\Exception\TranslatorException;
-	use Translator\Http\Request;
+	use Translator\Http\RequestInterface;
 	use Translator\Translated;
 	use Translator\Detected;
 
@@ -32,7 +32,7 @@
 		/**
 		 * @param string $apiKey
 		*/
-		public function __construct( Request $request, $apiKey ){
+		public function __construct( RequestInterface $request, $apiKey ){
 			parent::__construct( $request );
 			$this->apiKey = $apiKey;
 			$this->setLangs();

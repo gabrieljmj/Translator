@@ -6,9 +6,10 @@
 	
 	namespace Translator\Http;
 
+	use Translator\Http\RequestInterface;
 	use \RuntimeException;
 
-	class Request{
+	class CurlRequest implements RequestInterface{
 		/**
 		 * Send a HTTP request
 		 *

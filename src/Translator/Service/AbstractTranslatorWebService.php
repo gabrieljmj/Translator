@@ -7,20 +7,20 @@
 	namespace Translator\Service;
 
 	use Translator\TranslatorInterface;
-	use Translator\Http\Request;
+	use Translator\Http\RequestInterface;
 
 	abstract class AbstractTranslatorWebService implements TranslatorInterface{
 		/**
 		 * Object for HTTP requests
 		 *
-		 * @var \Translator\Http\Request
+		 * @var \Translator\Http\RequestInterface
 		*/
 		protected $request;
 
 		/**
-		 * @param \Translator\Http\Request $request
+		 * @param \Translator\Http\RequestInterface $request
 		*/
-		public function __construct( Request $request ){
+		public function __construct( RequestInterface $request ){
 			$this->request = $request;
 		}
 

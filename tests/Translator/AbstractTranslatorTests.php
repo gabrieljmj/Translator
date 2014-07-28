@@ -2,7 +2,7 @@
 	namespace Test\Translator;
 
 	use \PHPUnit_Framework_TestCase;
-	use Translator\Http\Request;
+	use Translator\Http\CurlRequest;
 	use Translator\TranslatedTextInfoInterface;
 	use Translator\DetectedLanguageInfoInterface;
 
@@ -10,7 +10,7 @@
 		private $request;
 
 		protected function setUp(){
-			$this->request = new Request();
+			$this->request = new CurlRequest();
 		}
 
 		public function assertPreConditions(){

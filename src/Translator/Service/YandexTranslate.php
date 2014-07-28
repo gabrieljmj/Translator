@@ -5,7 +5,7 @@
 	use Translator\Exception\TranslatorException;
 	use Translator\Translated;
 	use Translator\Detected;
-	use Translator\Http\Request;
+	use Translator\Http\RequestInterface;
 
 	class YandexTranslate extends AbstractTranslatorWebService{
 		const API_URL = 'https://translate.yandex.net/api/v1.5/tr.json';
@@ -28,7 +28,7 @@
 		 * @param \Translator\Http\Request $request
 		 * @param string                   $apiKey
 		*/
-		public function __construct( Request $request, $apiKey ){
+		public function __construct( RequestInterface $request, $apiKey ){
 			parent::__construct( $request );
 			$this->apiKey = $apiKey;
 			$this->setLangs();
