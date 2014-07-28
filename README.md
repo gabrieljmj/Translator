@@ -62,7 +62,7 @@ $translatedText->getOriginalText();//Array( 'Hi!', 'How are you?' )
 $translatedText->getOriginalLang();//en
 $translatedText->getNewLang();//pt
 ```
-###Detecting
+###Detecting language
 ```php
 $detectedText = $translator->detect( $text );
 $detectedText->getLang();//en
