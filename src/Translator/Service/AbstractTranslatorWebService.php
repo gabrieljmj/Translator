@@ -31,9 +31,9 @@
 		 * @param string|array $text
 		*/
 		protected function constructTextParam( $paramName, $text ){
-			$param = null;
-
 			if( is_array( $text ) ){
+				$param = null;
+
 				foreach( $text as $str ){
 					if( !is_string( $str ) ){
 						throw new TranslatorException( 'All parameters must be string' );
@@ -41,14 +41,14 @@
 
 					$param .= ( !is_null( $param ) ) ? '&' . $paramName . '=' . $str : $paramName . '=' . $str;
 				}
-			}else{
-				if( !is_string( $text ) ){
-					throw new TranslatorException( 'The text must be string' );
-				}
 
-				$param = $paramName . '=' . $text;
+				return $param;
 			}
 
-			return $param;
+			if( !is_string( $text ) ){
+				throw new TranslatorException( 'The text must be string' );
+			}
+
+			return $paramName . '=' . $text;
 		}
 	}
