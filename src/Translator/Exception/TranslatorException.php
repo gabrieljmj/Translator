@@ -8,4 +8,6 @@
 
 	use \Exception;
 
-	class TranslatorException extends Exception{}
+	class TranslatorException extends Exception
+	{
+	}
