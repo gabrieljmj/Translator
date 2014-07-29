@@ -1,7 +1,7 @@
 <phpunit bootstrap="bootstrap.php">
-	<testsuites>
-		<testsuite name="Translator">
-			<directory>tests/</directory>
-		</testsuite>
-	</testsuites>
+    <testsuites>
+        <testsuite name="Translator">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

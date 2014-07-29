@@ -1,25 +1,25 @@
 <?php
-	/**
-	 * @author Gabriel Jacinto <gamjj74@hotmail.com>
-	 * @license MIT License
-	*/
+/**
+ * @author Gabriel Jacinto <gamjj74@hotmail.com>
+ * @license MIT License
+*/
 
-	namespace Translator;
+namespace Translator;
 
-	interface DetectedLanguageInfoInterface
-	{
-		/**
-		 * @return string|array
-		*/
-		public function getText();
+interface DetectedLanguageInfoInterface
+{
+    /**
+     * @return string|array
+    */
+    public function getText();
 
-		/**
-		 * @return string|array
-		*/
-		public function getLang();
+    /**
+     * @return string|array
+    */
+    public function getLang();
 
-		/**
-		 * @return array
-		*/
-		public function getDetectedTextWithLang();
-	}
+    /**
+     * @return array
+    */
+    public function getDetectedTextWithLang();
+}
