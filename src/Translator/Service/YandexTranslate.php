@@ -7,7 +7,8 @@
 	use Translator\Detected;
 	use Translator\Http\RequestInterface;
 
-	class YandexTranslate extends AbstractTranslatorWebService{
+	class YandexTranslate extends AbstractTranslatorWebService
+	{
 		const API_URL = 'https://translate.yandex.net/api/v1.5/tr.json';
 
 		/**
@@ -28,8 +29,9 @@
 		 * @param \Translator\Http\Request $request
 		 * @param string                   $apiKey
 		*/
-		public function __construct( RequestInterface $request, $apiKey ){
-			parent::__construct( $request );
+		public function __construct(RequestInterface $request, $apiKey)
+		{
+			parent::__construct($request);
 			$this->apiKey = $apiKey;
 			$this->setLangs();
 		}
@@ -43,13 +45,14 @@
 		 * @param string|array  $text
 		 * @return string|array
 		*/
-		public function translate( $originalLang, $newLang, $text ){
-			$return = $this->getTranslateFromApi( $originalLang, $newLang, $text );
-			$this->verifyErrorAndThrowAnException( $return );
+		public function translate($originalLang, $newLang, $text)
+		{
+			$return = $this->getTranslateFromApi($originalLang, $newLang, $text);
+			$this->verifyErrorAndThrowAnException($return);
 
-			$translatedText = ( is_array( $text ) ) ? $return->text : $return->text[0];
+			$translatedText = (is_array($text)) ? $return->text : $return->text[0];
 
-			return new Translated( $text, $translatedText, $originalLang, $newLang );
+			return new Translated($text, $translatedText, $originalLang, $newLang);
 		}
 
 		/**
@@ -58,22 +61,23 @@
 		 * @param string|array $text
 		 * @return string
 		*/
-		public function detect( $text ){
-			$return = $this->getDetectionFromApi( $text );
+		public function detect($text)
+		{
+			$return = $this->getDetectionFromApi($text);
 
-			if( is_array( $return ) ){
+			if (is_array($return)) {
 				$langs = array();
 
-				foreach( $return as $detection ){
-					$this->verifyErrorAndThrowAnException( $detection );
+				foreach($return as $detection) {
+					$this->verifyErrorAndThrowAnException($detection);
 
 					$langs[] = $detection->lang;
 				}
 
-				return new Detected( $text, $langs );
+				return new Detected($text, $langs);
 			}
 
-			return new Detected( $text, $return->lang );
+			return new Detected($text, $return->lang);
 		}
 
 		/**
@@ -81,20 +85,22 @@
 		 *
 		 * @return array
 		*/
-		public function getAcceptedLangs(){
+		public function getAcceptedLangs()
+		{
 			return $this->langs;
 		}
 
 		/**
 		 * Updates with all accepted languages
 		*/
-		private function setLangs(){
+		private function setLangs()
+		{
 			$url = self::API_URL . '/getLangs';
-			$return = json_decode( $this->request->send( $url, array( 'key' => $this->apiKey, 'ui' => 'en' ) ) );
-			$this->verifyErrorAndThrowAnException( $return );
+			$return = json_decode($this->request->send($url, array('key' => $this->apiKey, 'ui' => 'en')));
+			$this->verifyErrorAndThrowAnException($return);
 
-			$langs = get_object_vars( $return->langs );
-			$this->langs = array_keys( $langs );
+			$langs = get_object_vars($return->langs);
+			$this->langs = array_keys($langs);
 		}
 
 		/**
@@ -103,48 +109,51 @@
 		 * @param string|array  $text
 		 * @return object
 		*/
-		private function getTranslateFromApi( $originalLang, $newLang, $text ){
+		private function getTranslateFromApi($originalLang, $newLang, $text)
+		{
 			$params = array(
 				'key' => $this->apiKey,
 				'lang' => $originalLang . '-' . $newLang
 			);
 
-			$textParam = $this->constructTextParam( 'text', $text );
-			$url = self::API_URL . '/translate?' . http_build_query( $params ) . '&' . $textParam;
-			return json_decode( $this->request->send( $url ) );
+			$textParam = $this->constructTextParam('text', $text);
+			$url = self::API_URL . '/translate?' . http_build_query($params) . '&' . $textParam;
+			return json_decode($this->request->send($url));
 		}
 
 		/**
 		 * @param string|array $text
 		 * @return string
 		*/
-		private function getDetectionFromApi( $text ){
-			if( is_array( $text ) ){
+		private function getDetectionFromApi($text)
+		{
+			if (is_array($text)) {
 				$detections = array();
 
-				foreach( $text as $textOne ){
-					$textOne = urlencode( $textOne );
-					$textParam = $this->constructTextParam( 'text', $textOne );
-					$url = self::API_URL . '/detect?' . http_build_query( array( 'key' => $this->apiKey ) ) . '&' . $textParam;
+				foreach($text as $textOne) {
+					$textOne = urlencode($textOne);
+					$textParam = $this->constructTextParam('text', $textOne);
+					$url = self::API_URL . '/detect?' . http_build_query(array('key' => $this->apiKey)) . '&' . $textParam;
 
-					$detections[] = json_decode( $this->request->send( $url ) );
+					$detections[] = json_decode($this->request->send($url));
 				}
 
 				return $detections;
 			}
 
-			$textParam = $this->constructTextParam( 'text', $text );
-			$url = self::API_URL . '/detect?' . http_build_query( array( 'key' => $this->apiKey ) ) . '&' . $textParam;
+			$textParam = $this->constructTextParam('text', $text);
+			$url = self::API_URL . '/detect?' . http_build_query(array('key' => $this->apiKey)) . '&' . $textParam;
 
-			return json_decode( $this->request->send( $url ) );
+			return json_decode($this->request->send($url));
 		}
 
 		/**
 		 * @var array|object $json
 		*/
-		private function verifyErrorAndThrowAnException( $json ){
-			if( isset( $json->message ) ){
-				throw new TranslatorException( 'Yandex Translator returns: ' . $json->message . ' (' . $json->code . ')' );
+		private function verifyErrorAndThrowAnException($json)
+		{
+			if (isset($json->message)) {
+				throw new TranslatorException('Yandex Translator returns: ' . $json->message . ' (' . $json->code . ')');
 			}
 		}
 	}

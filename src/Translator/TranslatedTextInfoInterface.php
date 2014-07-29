@@ -6,7 +6,8 @@
 
 	namespace Translator;
 
-	interface TranslatedTextInfoInterface{
+	interface TranslatedTextInfoInterface
+	{
 		/**
 		 * @return string|array
 		*/

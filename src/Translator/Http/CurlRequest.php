@@ -9,7 +9,8 @@
 	use Translator\Http\RequestInterface;
 	use \RuntimeException;
 
-	class CurlRequest implements RequestInterface{
+	class CurlRequest implements RequestInterface
+	{
 		/**
 		 * Send a HTTP request
 		 *
@@ -20,24 +21,25 @@
 		 * @param boolean           $post
 		 * @return string
 		*/
-		public function send( $url, $params = null, $header = null, $ssl = false, $post = false ){
-			if( !$post ){
-				$url .= ( is_array( $params ) && count( $params ) > 0 ) ? '?' . http_build_query( $params ) : $params;
+		public function send($url, $params = null, $header = null, $ssl = false, $post = false)
+		{
+			if (!$post) {
+				$url .= (is_array($params) && count($params) > 0) ? '?' . http_build_query($params) : $params;
 			}
 
 			$ch = curl_init();
             
-			curl_setopt( $ch, CURLOPT_URL, $url );
-			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-			( is_null( $header ) ) ?: curl_setopt( $ch, CURLOPT_HTTPHEADER, $header ) ;
-			curl_setopt( $ch, CURLOPT_POST, $post );
-			( !$post ) ?: curl_setopt( $ch, CURLOPT_POSTFIELDS, $params );
-			curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, $ssl );
+			curl_setopt($ch, CURLOPT_URL, $url );
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
+			(is_null( $header)) ?: curl_setopt( $ch, CURLOPT_HTTPHEADER, $header);
+			curl_setopt($ch, CURLOPT_POST, $post );
+			(!$post) ?: curl_setopt( $ch, CURLOPT_POSTFIELDS, $params);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $ssl);
             
-			$return = curl_exec( $ch );
+			$return = curl_exec($ch);
 
-			if( !$return ){
-				throw new RuntimeException( 'An error occurred with the request: ' . curl_error( $ch ) );
+			if (!$return) {
+				throw new RuntimeException('An error occurred with the request: ' . curl_error($ch));
 			}
 
 			return $return;

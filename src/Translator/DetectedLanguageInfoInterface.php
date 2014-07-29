@@ -6,7 +6,8 @@
 
 	namespace Translator;
 
-	interface DetectedLanguageInfoInterface{
+	interface DetectedLanguageInfoInterface
+	{
 		/**
 		 * @return string|array
 		*/

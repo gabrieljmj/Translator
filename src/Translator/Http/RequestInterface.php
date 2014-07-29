@@ -6,7 +6,8 @@
 
 	namespace Translator\Http;
 
-	interface RequestInterface{
+	interface RequestInterface
+	{
 		/**
 		 * Send a HTTP request
 		 *
@@ -17,5 +18,5 @@
 		 * @param boolean           $post
 		 * @return string
 		*/
-		public function send( $url, $params = null, $header = null, $ssl = false, $post = false );
+		public function send($url, $params = null, $header = null, $ssl = false, $post = false);
 	}

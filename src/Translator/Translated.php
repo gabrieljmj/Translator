@@ -8,7 +8,8 @@
 
 	use Translator\TranslatedTextInfoInterface;
 
-	class Translated implements TranslatedTextInfoInterface{
+	class Translated implements TranslatedTextInfoInterface
+	{
 		/**
 		 * Translated text
 		 *
@@ -42,7 +43,8 @@
 		 * @param string       $originalLang
 		 * @param string       $newLang
 		*/
-		public function __construct( $originalText, $newText, $originalLang, $newLang ){
+		public function __construct($originalText, $newText, $originalLang, $newLang)
+		{
 			$this->originalText = $originalText;
 			$this->newText = $newText;
 			$this->originalLang = $originalLang;
@@ -52,28 +54,32 @@
 		/**
 		 * @return string|array
 		*/
-		public function getOriginalText(){
+		public function getOriginalText()
+		{
 			return $this->originalLang;
 		}
 
 		/**
 		 * @return string|array
 		*/
-		public function getNewText(){
+		public function getNewText()
+		{
 			return $this->newText;
 		}
 
 		/**
 		 * @return string
 		*/
-		public function getOriginalLang(){
+		public function getOriginalLang()
+		{
 			return $this->originalLang;
 		}
 
 		/**
 		 * @return string
 		*/
-		public function getNewLang(){
+		public function getNewLang()
+		{
 			return $this->newLang;
 		}
 	}

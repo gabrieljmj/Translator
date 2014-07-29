@@ -12,7 +12,8 @@
 	use Translator\Translated;
 	use Translator\Detected;
 
-	class GoogleTranslate extends AbstractTranslatorWebService{
+	class GoogleTranslate extends AbstractTranslatorWebService
+	{
 		const API_URL = 'https://www.googleapis.com/language/translate/v2';
 
 		/**
@@ -32,8 +33,9 @@
 		/**
 		 * @param string $apiKey
 		*/
-		public function __construct( RequestInterface $request, $apiKey ){
-			parent::__construct( $request );
+		public function __construct(RequestInterface $request, $apiKey)
+		{
+			parent::__construct($request);
 			$this->apiKey = $apiKey;
 			$this->setLangs();
 		}
@@ -53,11 +55,11 @@
 		private function setLangs(){
 			$url = self::API_URL . '/languages';
 
-			$return = $this->request->send( $url, array( 'key' => $this->apiKey ) );
-			$json = json_decode( $return );
-			$this->verifyErrorAndThrowAnException( $json );
+			$return = $this->request->send($url, array('key' => $this->apiKey));
+			$json = json_decode($return);
+			$this->verifyErrorAndThrowAnException($json);
 
-			foreach( $json->data->languages as $lang ){
+			foreach($json->data->languages as $lang) {
 				$this->langs[] = $lang->language;
 			}
 		}
@@ -71,21 +73,22 @@
 		 * @param string|array  $text
 		 * @return string
 		*/
-		public function translate( $originalLang, $newLang, $text ){
-			$json = $this->getTranslationFromApi( $originalLang, $newLang, $text );
-			$this->verifyErrorAndThrowAnException( $json );
+		public function translate($originalLang, $newLang, $text)
+		{
+			$json = $this->getTranslationFromApi($originalLang, $newLang, $text);
+			$this->verifyErrorAndThrowAnException($json);
 
-			if( count( $json->translations ) > 1 ){
+			if (count($json->translations) > 1) {
 				$return = array();
 
-				foreach( $json->translations as $translation ){
+				foreach($json->translations as $translation) {
 					$return[] = $translation->translatedText;
 				}
 
-				return new Translated( $text, $return, $originalLang, $newLang );
+				return new Translated($text, $return, $originalLang, $newLang);
 			}
 
-			return new Translated( $text, $json->translations[0]->translatedText, $originalLang, $newLang );
+			return new Translated($text, $json->translations[0]->translatedText, $originalLang, $newLang);
 		}
 
 		/**
@@ -94,22 +97,23 @@
 		 * @param string|array $text
 		 * @return string|array
 		*/
-		public function detect( $text ){
-			$detection = $this->getDetectionFromApi( $text );
+		public function detect($text) {
+			$detection = $this->getDetectionFromApi($text);
 
-			if( is_array( $detection->data->detections ) ){
+			if (is_array($detection->data->detections))
+			{
 				$return = array();
 
-				foreach( $detection->data->detections as $d ){
-					foreach( $d as $d2 ){
+				foreach($detection->data->detections as $d) {
+					foreach($d as $d2) {
 						$return[] = $d2->language;
 					}
 				}
 
-				return new Detected( $text, $return );
+				return new Detected($text, $return);
 			}
 
-			return new Detected( $text, $detection->data->detections[0][0]->language );
+			return new Detected($text, $detection->data->detections[0][0]->language);
 		}
 
 		/**
@@ -118,35 +122,38 @@
 		 * @param string|array  $text
 		 * @return object|array
 		*/
-		private function getTranslationFromApi( $originalLang, $newLang, $text ){
+		private function getTranslationFromApi($originalLang, $newLang, $text)
+		{
 			$getParams = array(
 				'key' => $this->apiKey,
 				'source' => $originalLang,
 				'target' => $newLang
 			);
 
-			$qParam = $this->constructTextParam( 'q', $text );
+			$qParam = $this->constructTextParam('q', $text);
 
-			$url = self::API_URL . '?' . http_build_query( $getParams ) . '&' . $qParam;
+			$url = self::API_URL . '?' . http_build_query($getParams) . '&' . $qParam;
 
-			return json_decode( $this->request->send( $url ) );
+			return json_decode($this->request->send($url));
 		}
 
 		/**
 		 * @param string|array
 		 * @return object|array
 		*/
-		private function getDetectionFromApi( $text ){
-			$qParam = $this->constructTextParam( 'q', $text );
+		private function getDetectionFromApi($text)
+		{
+			$qParam = $this->constructTextParam('q', $text);
 
 			$url = self::API_URL . '/detect?key=' . $this->apiKey . '&' . $qParam;
 
-			return json_decode( $this->request->send( $url ) );
+			return json_decode($this->request->send($url));
 		}
 
-		private function verifyErrorAndThrowAnException( $json ){
-			if( isset( $json->error ) ){
-				throw new TranslatorException( 'Google Translate returns: ' . $json->error->message . ' (' . $json->error->code . ')' );
+		private function verifyErrorAndThrowAnException($json)
+		{
+			if (isset($json->error)) {
+				throw new TranslatorException('Google Translate returns: ' . $json->error->message . ' (' . $json->error->code . ')');
 			}
 		}
 	}

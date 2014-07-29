@@ -9,7 +9,8 @@
 	/**
 	 * Interface to translators
 	*/
-	interface TranslatorInterface{
+	interface TranslatorInterface
+	{
 		/**
 		 * Returns all accepted languages by service
 		 *
@@ -26,7 +27,7 @@
 		 * @param string|array  $text
 		 * @return \Translator\TranslatedTextInfoInterface
 		*/
-		public function translate( $originalLang, $newLang, $text );
+		public function translate($originalLang, $newLang, $text);
 
 		/**
 		 * Detect the language of one or more texts
@@ -34,5 +35,5 @@
 		 * @param string|array $text
 		 * @return \Translator\DetectedLanguageInfoInterface
 		*/
-		public function detect( $text );
+		public function detect($text);
 	}

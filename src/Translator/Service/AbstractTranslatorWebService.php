@@ -9,7 +9,8 @@
 	use Translator\TranslatorInterface;
 	use Translator\Http\RequestInterface;
 
-	abstract class AbstractTranslatorWebService implements TranslatorInterface{
+	abstract class AbstractTranslatorWebService implements TranslatorInterface
+	{
 		/**
 		 * Object for HTTP requests
 		 *
@@ -20,7 +21,8 @@
 		/**
 		 * @param \Translator\Http\RequestInterface $request
 		*/
-		public function __construct( RequestInterface $request ){
+		public function __construct(RequestInterface $request)
+		{
 			$this->request = $request;
 		}
 
@@ -30,23 +32,24 @@
 		 * @param string       $paramName
 		 * @param string|array $text
 		*/
-		protected function constructTextParam( $paramName, $text ){
-			if( is_array( $text ) ){
+		protected function constructTextParam( $paramName, $text )
+		{
+			if (is_array($text)) {
 				$param = null;
 
-				foreach( $text as $str ){
-					if( !is_string( $str ) ){
-						throw new TranslatorException( 'All parameters must be string' );
+				foreach($text as $str){
+					if (!is_string($str)) {
+						throw new TranslatorException('All parameters must be string');
 					}
 
-					$param .= ( !is_null( $param ) ) ? '&' . $paramName . '=' . $str : $paramName . '=' . $str;
+					$param .= (!is_null($param)) ? '&' . $paramName . '=' . $str : $paramName . '=' . $str;
 				}
 
 				return $param;
 			}
 
-			if( !is_string( $text ) ){
-				throw new TranslatorException( 'The text must be string' );
+			if (!is_string($text)) {
+				throw new TranslatorException('The text must be string');
 			}
 
 			return $paramName . '=' . $text;
