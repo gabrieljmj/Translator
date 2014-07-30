@@ -59,6 +59,10 @@ class Detected implements DetectedLanguageInfoInterface
             return array_combine($this->text, $this->lang);
         }
 
+        if (is_array($this->text) || is_array($this->lang)) {
+            throw new \Exception('Language and text SHOULD be both array or string');
+        }
+
         return array($this->text => $this->lang);
     }
 }
