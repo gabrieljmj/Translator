@@ -56,7 +56,7 @@ class Translated implements TranslatedTextInfoInterface
     */
     public function getOriginalText()
     {
-        return $this->originalLang;
+        return $this->originalText;
     }
 
     /**
