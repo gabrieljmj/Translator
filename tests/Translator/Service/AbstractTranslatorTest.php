@@ -1,23 +1,23 @@
 <?php
-namespace Test\Translator;
+namespace Test\Translator\Service;
 
 use \PHPUnit_Framework_TestCase;
 use Translator\Http\CurlRequest;
 use Translator\TranslatedTextInfoInterface;
 use Translator\DetectedLanguageInfoInterface;
 
-abstract class AbstractTranslatorTests extends PHPUnit_Framework_TestCase
+abstract class AbstractTranslatorTest extends PHPUnit_Framework_TestCase
 {
     private $request;
 
-    protected function setUp()
+    protected function setup()
     {
         $this->request = new CurlRequest();
     }
 
     public function assertPreConditions()
     {
-        $this->assertTrue(class_exists(get_class($this->getTranslator())));
+        $this->assertTrue(class_exists(get_class($this->getTranslator($this->request))));
     }
 
     public function testTranslation()
@@ -62,5 +62,5 @@ abstract class AbstractTranslatorTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('hi' => 'en', 'Olá!' => 'pt'), $detection->getDetectedTextWithLang());
     }
 
-    abstract protected function getTranslator();
+    abstract protected function getTranslator(CurlRequest $request);
 }
