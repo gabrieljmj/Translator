@@ -1,5 +1,6 @@
 Translator
 ==========
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/GabrielJMJ/Translator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Total Downloads](https://poser.pugx.org/gabrieljmj/translator/downloads.png)](https://packagist.org/packages/gabrieljmj/translator) [![Latest Unstable Version](https://poser.pugx.org/gabrieljmj/translator/v/unstable.png)](https://packagist.org/packages/gabrieljmj/translator) [![License](https://poser.pugx.org/gabrieljmj/translator/license.png)](https://packagist.org/packages/gabrieljmj/translator) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GabrielJMJ/Translator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GabrielJMJ/Translator/?branch=master)
 
 Translator to texts using Web Services or other things that can do this action.
